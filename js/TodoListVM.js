@@ -1,9 +1,13 @@
 define([
   'knockout',
-  'TodoItem'
+  'TodoItem',
+  'persistence',
+  'anItemEvents'
 ], function(
   ko,
-  TodoItem
+  TodoItem,
+  persistence,
+  anItem
 ){
 
   return function TodoListVM(model, when){
@@ -37,23 +41,15 @@ define([
 
     this.newItemContent.subscribe(function(value){
       if(value.length){
-        self.todos.push(new TodoItem(value));
+        var id = persistence.newId();
+        self.todos.push(new TodoItem(id, value));
+        anItem.hasBeenAdded(id, value);
         self.newItemContent("");
       }
     });
 
     this.listNotEmpty = ko.computed(function(){
       return self.todos().length > 0;
-    });
-
-    this.emptyTodos = ko.computed(function(){
-      return self.todos().filter(function(item){
-        return item.content().length == 0;
-      });
-    });
-
-    this.emptyTodos.subscribe(function(emptyTodos){
-      self.todos.removeAll(emptyTodos);
     });
 
     this.areAllSelected = ko.computed(function(){
@@ -73,14 +69,34 @@ define([
     });
 
     this.remove = function(item){
+      anItem.hasBeenRemoved(item.id);
       self.todos.remove(item);
     };
 
     this.removeCompletedItems = function(){
       self.todos.remove(function(item){
         return item.completed();
+      }).forEach(function(item){
+        anItem.hasBeenRemoved(item.id);
       });
     };
+
+    function removeTheItemIfItIsEmpty(id, content){
+      if(content.length == 0){
+        self.todos.remove(function(item){
+          return item.id == id;
+        }).forEach(function(item){
+          anItem.hasBeenRemoved(item.id);
+        });
+      }
+    };
+
+    init: {
+      when(anItem.hasBeenEdited, removeTheItemIfItIsEmpty);
+
+      self.todos(persistence.load().map(TodoItem.create));
+
+    }
 
   };
 
