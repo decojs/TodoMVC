@@ -13,6 +13,8 @@ define([
 
     this.todos = ko.observableArray([]);
 
+    this.selectAll = ko.observable(false);
+
     this.numberOfTodos = ko.computed(function(){
       return self.todos().filter(function(item){
         return item.completed() == false;
@@ -38,6 +40,26 @@ define([
         self.todos.push(new TodoItem(value));
         self.newItemContent("");
       }
+    });
+
+    this.listNotEmpty = ko.computed(function(){
+      return self.todos().length > 0;
+    });
+
+    this.areAllSelected = ko.computed(function(){
+      return self.todos().every(function(item){
+        return item.completed();
+      });
+    });
+
+    this.areAllSelected.subscribe(function(allAreSelected){
+      self.selectAll.updateWithoutNotifyingSubscribers(allAreSelected);
+    });
+
+    this.selectAll.ignorableSubscribe(function(value){
+      self.todos().forEach(function(item){
+        item.completed(value);
+      });
     });
 
     this.remove = function(item){
