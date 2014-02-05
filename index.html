@@ -24,10 +24,10 @@
 					<li class="completed" data-bind="css: {completed: completed, editing: editing}, visible:true" style="display: none">
 						<div class="view">
 							<input class="toggle" type="checkbox" data-bind="checked: completed">
-							<label data-bind="text: content"></label>
+							<label data-bind="text: content, event: {dblclick: edit}"></label>
 							<button class="destroy" data-bind="click: $parent.remove"></button>
 						</div>
-						<input class="edit" data-bind="value: content">
+						<input class="edit" data-bind="value: content, hasFocus: editing">
 					</li>
 				</ul>
 			</section>
