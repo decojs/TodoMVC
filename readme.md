@@ -1,34 +1,22 @@
-# Framework Name TodoMVC Example
+# DecoJS TodoMVC Example
 
-> Short description of the framework provided by the official website.
+> Maintainable frontend architecture
 
-> _[Framework Name - framework.com](link-to-framework)_
+> _[DecoJS - decojs.com](http://decojs.com)_
 
 
-## Learning Framework Name
+## Learning DecoJS
 
-The [Framework Name website]() is a great resource for getting started.
+The [DecoJS website](http://decojs.com) is a great resource for getting started.
 
 Here are some links you may find helpful:
 
-* [Documentation]()
+* [Documentation](http://decojs.com)
 * [API Reference]()
-* [Applications built with Framework Name]()
+* [Applications built with DecoJS]()
 * [Blog]()
 * [FAQ]()
-* [Framework Name on GitHub]()
-
-Articles and guides from the community:
-
-* [Article 1]()
-* [Article 2]()
-
-Get help from other Framework Name users:
-
-* [Framework Name on StackOverflow](http://stackoverflow.com/questions/tagged/____)
-* [Mailing list on Google Groups]()
-* [Framework Name on Twitter](http://twitter.com/____)
-* [Framework Name on Google +]()
+* [DecoJS on GitHub](https://github.com/decojs/)
 
 _If you have other helpful links to share, or find any of the links above no longer work, please [let us know](https://github.com/tastejs/todomvc/issues)._
 
