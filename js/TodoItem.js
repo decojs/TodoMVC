@@ -10,12 +10,11 @@ define([
     this.completed = ko.observable(false);
     this.editing = ko.observable(false);
 
-    this.content = ko.observable(todo || "");
+    this.content = ko.observable(todo.trim() || "");
 
     this.content.subscribe(function(value){
-      if(value){
-        self.editing(false);
-      }
+      self.content(value.trim());
+      self.editing(false);
     })
 
     this.edit = function(){

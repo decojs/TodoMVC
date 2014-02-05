@@ -46,6 +46,16 @@ define([
       return self.todos().length > 0;
     });
 
+    this.emptyTodos = ko.computed(function(){
+      return self.todos().filter(function(item){
+        return item.content().length == 0;
+      });
+    });
+
+    this.emptyTodos.subscribe(function(emptyTodos){
+      self.todos.removeAll(emptyTodos);
+    });
+
     this.areAllSelected = ko.computed(function(){
       return self.todos().every(function(item){
         return item.completed();
