@@ -27,7 +27,7 @@
 							<label data-bind="text: content, event: {dblclick: edit}"></label>
 							<button class="destroy" data-bind="click: $parent.remove"></button>
 						</div>
-						<input class="edit" data-bind="value: content, hasFocus: editing">
+						<input class="edit" data-bind="value: editContent, hasFocus: editing, esc: cancelEdit, enter: completeEdit">
 					</li>
 				</ul>
 			</section>

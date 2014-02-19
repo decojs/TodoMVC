@@ -14,7 +14,7 @@
     ]
   });
 
-  require(['deco', 'koExtensions'], function(deco){
+  require(['deco', 'koExtensions', 'koBindings'], function(deco){
     deco.config().start();
   });
 

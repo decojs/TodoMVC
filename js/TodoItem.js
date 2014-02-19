@@ -16,10 +16,15 @@ define([
 
     this.content = ko.observable(todo.trim() || "");
 
-    this.content.subscribe(function(value){
-      self.content(value.trim());
-      self.editing(false);
-      anItem.hasBeenEdited(id, value);
+    this.editContent = ko.observable(todo.trim() || "");
+
+    this.editing.ignorableSubscribe(function(value){
+      if(value === false){
+        var trimmedValue = self.editContent().trim();
+        self.content(trimmedValue);
+        self.editing(false);
+        anItem.hasBeenEdited(id, trimmedValue);
+      }
     });
 
     this.completed.subscribe(function(completed){
@@ -31,7 +36,16 @@ define([
     });
 
     this.edit = function(){
+      self.editContent(self.content());
       self.editing(true);
+    };
+
+    this.cancelEdit = function(){
+      self.editing.updateWithoutNotifyingSubscribers(false);
+    };
+
+    this.completeEdit = function(){
+      self.editing(false);
     };
 
   };
